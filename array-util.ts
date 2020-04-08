@@ -1,19 +1,18 @@
 export class ArrayUtil{
   
   static intersection(arrayA:any[], arrayB:any[]):any[]{
-    console.time('intersection o(n^2)')
+    console.time('intersection 1');
     const args = Array.from(arguments).sort((a,b)=> a.length - b.length );
     const intersection = args[0].filter(a => args[1].includes(a));
-    console.timeEnd('intersection o(n^2)')
+    console.timeEnd('intersection 1');
     return intersection;
   }
 
   static intersectionFast(arrayA:any[], arrayB:any[]):any[]{
-    console.time('intersection o(n)')
-    const hashMap = {}
-    arrayA.forEach(a => hashMap[a] = true)
-    console.timeEnd('intersection o(n)')
-    const intersection = arrayB.filter(b => hashMap[b]);
+    console.time('intersection 2');
+    const keys = new Set(arrayA);
+    const intersection = arrayB.filter(b => keys.has(b));
+    console.timeEnd('intersection 2');
     return intersection;
   }
   
